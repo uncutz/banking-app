@@ -1,0 +1,52 @@
+* {
+    /*border: 1px grey solid;*/
+}
+body {
+    font-family: 'Poppins', sans-serif;
+}
+:root {
+    --primary-color:#6651C5;
+}
+.container, .col {
+    text-align: center;
+}
+
+.title-it {
+    color: var(--primary-color);
+}
+
+.-title {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.-home {
+    font-weight: bold;
+}
+.-balance {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #828282;
+}
+
+
+.popup {
+    background-color: rgba(0,0,0,0.6);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    height: 40%;
+    width: 60%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+
+}
