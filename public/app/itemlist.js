@@ -1,4 +1,5 @@
 import ItemComponent from "./items.js";
+
 class ItemList {
 
     /**
@@ -14,8 +15,13 @@ class ItemList {
 
 }
 
+/**
+ *
+ * @param {ItemList}itemList
+ * @return {ChildNode}
+ */
 
-function render (){
+function render (itemList){
     const $element = document.createElement('div')
     $element.innerHTML =`<div class="container">
 
@@ -48,56 +54,23 @@ function render (){
 </div>
 </div>`;
 
-    return $element.firstChild;
-}
+    const list = $element.querySelector('.putithere')
+    document.addEventListener('reload-list', function (){
+            list.innerHTML = ''
+            for (let i = 0; i < itemList.list.length; i++) {
+                const listItem = itemList.list[i]
 
-function renderItem(item) {
-
-    const $element = document.createElement('div')
-
-    $element.innerHTML = `<div class="row">
-                            <div class="col-6 col-md-4">${item.name}</div>
-                            <div class="col-6 col-md-4">${item.date}</div>
-                            <div class="col-6 col-md-4">${item.quantity}</div>
-                            <div class="col-6 col-md-4"><button type="button" class="btn btn-light btn-delete">Del</button></div>
-                            </div>`;
- //If Else für Farben
-    /*const $select = document.querySelector('.selectType').value;
-    if ($select === "expenses") {
-        $element.innerHTML = `<div class="row">
-                            <div class="col-6 col-md-4">${item.name}</div>
-                            <div class="col-6 col-md-4" style="color: red">-${item.date}</div>
-                            <div class="col-6 col-md-4">${item.quantity}</div>
-                            <div class="col-6 col-md-4"><button type="button" class="btn btn-light btn-delete">Del</button></div>
-                            </div>`
-    }
-    else {
-        $element.innerHTML = `<div class="row">
-                            <div class="col-6 col-md-4">${item.name}</div>
-                            <div class="col-6 col-md-4" style="color: green">+${item.date}</div>
-                            <div class="col-6 col-md-4">${item.quantity}</div>
-                            <div class="col-6 col-md-4"><button type="button" class="btn btn-light btn-delete">Del</button></div>
-                            </div>`
-    }*/
-    $element.querySelector('.btn-delete').addEventListener('click', deleteItem)
-    function deleteItem() {
-        dispatchEvent(new CustomEvent('delete-item', {
-            detail: {
-                item: item
+                list.appendChild(ItemComponent.renderItem(listItem))
             }
-        }))
-        console.log('x')
-    }
+        }
+    )
 
-
-    document.querySelector('.putithere').appendChild($element)
-    //return $element.firstChild;
+    return $element.firstChild;
 }
 
 
 const ItemListComponent = {
     ItemList,
-    renderItem,
     render
 }
 
