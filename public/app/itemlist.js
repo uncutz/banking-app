@@ -7,6 +7,10 @@ class ItemList {
     constructor(list = []) {
         this.list = list;
     }
+    delete(item) {
+        const index = this.list.indexOf(item)
+        this.list.splice(index, 1);
+    }
 
 }
 
@@ -24,9 +28,10 @@ function render (){
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link active -home" aria-current="page" href="#">Home</a>
-                        <button type="button" class="btn btn-dark btn-sm add-new">Add New</button>
+                        <!--<button type="button" class="btn btn-dark btn-sm add-new">Add New</button>-->
                     </div>
                 </div>
+                <button type="button" class="btn btn-dark btn-sm add-new">Add New</button>
             </div>
         </nav>
 
@@ -74,37 +79,21 @@ function renderItem(item) {
                             <div class="col-6 col-md-4"><button type="button" class="btn btn-light btn-delete">Del</button></div>
                             </div>`
     }*/
-
-    $element.querySelector('.btn-delete').addEventListener('click', ()=>{
+    $element.querySelector('.btn-delete').addEventListener('click', deleteItem)
+    function deleteItem() {
         dispatchEvent(new CustomEvent('delete-item', {
-            detail:{
+            detail: {
                 item: item
             }
         }))
         console.log('x')
-    })
+    }
+
+
     document.querySelector('.putithere').appendChild($element)
     //return $element.firstChild;
 }
 
-
-/*function popupandparse () { //wenn man auf Button save klickt wird object in list gespeichert
-    const $save = document.querySelector('.save');
-    $save.addEventListener('click', function (){
-
-        //Variavlen mit Input Werten deklarieren
-        const inpName = document.querySelector('.inp-name').value;
-        const inpDate = document.querySelector('.inp-date').value;
-        const inpQuantity = document.querySelector('.inp-quantity').value;
-
-        document.dispatchEvent(new CustomEvent('add-item',{
-            detail: {
-             item:  new ItemComponent.Item(inpName, inpDate, inpQuantity)
-            }
-        }))
-        document.querySelector('.popup').style.display = "none";
-    });
-}*/
 
 const ItemListComponent = {
     ItemList,

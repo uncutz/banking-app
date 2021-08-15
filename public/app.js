@@ -8,9 +8,8 @@ function App() {
     this.run= function () {
         const itemList = new ItemListComponent.ItemList();//neu erstellte Variable die ein Object mit einem Array als Eigenschaft besitzt
 
-
         document.body.appendChild(ItemListComponent.render());
-        PopupComponent.popupAndPass()
+        PopupComponent.popupAndPass();
 
 
         //----------------------------------Evetnlistener hinzufügen mit custom event type--------------------------------------------
@@ -18,9 +17,7 @@ function App() {
 
         document.addEventListener('save-item', saveItem);//SaveButton
 
-        document.addEventListener('delete-item', event =>{
-            console.log('delete')
-        });//DeleteButton
+        document.addEventListener('delete-item', deleteItem);//DeleteButton
 
         //------------------------Event Listener Funktionen deklariert --------------------------------------
         //weist dem Object itemList einen weitergegebenen Wert (Eigenschaft 'item' vom Eventobject) des Eventobjekts 'event' vom cutom event typ 'add-item' zu
@@ -35,7 +32,6 @@ function App() {
             else {
                 const item = event.detail.item
                 itemList.list.push(item);
-                //document.body.appendChild(ItemComponent.render(item))
                 ItemListComponent.renderItem(item);
                 document.querySelector('.popup').style.display = "none";
             }
@@ -47,6 +43,11 @@ function App() {
         }
         console.log(itemList)
 
+        function deleteItem(event) {
+            //itemList.delete(event.detail.item)
+            itemList.delete(event.detail.item)
+            console.log('xy')
+        }
     }
 }
 

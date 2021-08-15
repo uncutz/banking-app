@@ -34,7 +34,6 @@ function popupAndPass () { //wenn man auf Button save klickt wird object in list
         const inpName = document.querySelector('.inp-name').value;
         const inpDate = document.querySelector('.inp-date').value;
         const inpQuantity = document.querySelector('.inp-quantity').value;
-        const select = document.querySelector('.selectType').value;
 
         //erstes Custom event
         document.dispatchEvent(new CustomEvent('save-item', {
