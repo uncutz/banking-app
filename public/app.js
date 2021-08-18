@@ -19,6 +19,8 @@ function App() {
 
         document.addEventListener('delete-item', deleteItem);//DeleteButton
 
+        document.addEventListener('total-quantity', totalQuantity);
+
 
         //------------------------Event Listener Funktionen deklariert --------------------------------------
         //weist dem Object itemList einen weitergegebenen Wert (Eigenschaft 'item' vom Eventobject) des Eventobjekts 'event' vom cutom event typ 'add-item' zu
@@ -32,7 +34,8 @@ function App() {
                 const name = event.detail.name;
                 const date = event.detail.date;
                 const quantity = event.detail.quantity;
-                const item = new ItemComponent.Item(name, date, quantity)
+                const type = event.detail.type;
+                const item = new ItemComponent.Item(name, date, quantity, type)
                 itemList.list.push(item);
                 ItemComponent.renderItem(item);
                 document.querySelector('.popup').style.display = "none";
@@ -49,8 +52,8 @@ function App() {
 
         function deleteItem(event) {
             itemList.delete(event.detail.item)
-            reloadList()
             console.log(itemList)
+            reloadList()
 
 
         }
@@ -59,18 +62,23 @@ function App() {
             document.dispatchEvent(new CustomEvent('reload-list'))
         }
 
+        function totalQuantity(event) {
+            const expenses = event.detail.expenses;
+            const income = event.detail.income;
 
+            const totalExpenses = document.createElement('div')
+            totalExpenses.innerHTML='';
+            totalExpenses.innerHTML= `<p>${expenses}</p>`;
+            //document.querySelector('.-total-expenses').appendChild('div')
+            const totalIncome = document.createElement('div')
+            totalIncome.innerHTML='';
+            totalIncome.innerHTML = `<p>${income}</p>`;
 
-        /*const list = document.querySelector('.putithere')
-        document.addEventListener('reload-list', function (){
-                list.innerHTML = ''
-                for (let i = 0; i < itemList.list.length; i++) {
-                    const listItem = itemList[i]
+            document.querySelector('.-total-expenses').appendChild(totalExpenses)
+            document.querySelector('.-total-income').appendChild(totalIncome)
 
-                    document.querySelector('.putithere').appendChild(listItem)
-                }
-            }
-        )*/
+        }
+
     }
 }
 

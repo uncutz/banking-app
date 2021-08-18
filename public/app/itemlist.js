@@ -1,4 +1,5 @@
 import ItemComponent from "./items.js";
+import items from "./items.js";
 
 class ItemList {
 
@@ -22,6 +23,8 @@ class ItemList {
  */
 
 function render (itemList){
+
+
     const $element = document.createElement('div')
     $element.innerHTML =`<div class="container">
 
@@ -51,17 +54,53 @@ function render (itemList){
     <div class="row putithere">
 
     </div>
-</div>
+    <div class="row -sum">
+        <div class="col-md-6 -total-income">
+        Income: 
+        </div>
+        <div class="col-md-6 -total-expenses">
+        Expenses:
+        </div>
+        <div class="col-12 -total">
+            <p>Total: </p>        
+        </div>
+    
+    </div>
+    
 </div>`;
+
+
+    document.addEventListener('click', function (){
+        let income = 0;
+        let expenses = 0;
+        const incomeItem = itemList.list.filter(item => item.type === "income");
+        const expensesItem = itemList.list.filter(item => item.type === "expenses");
+        for (let i=0; i < expensesItem.length; i++) {
+            expenses += parseInt(expensesItem[i].quantity)
+        }
+        for (let i=0; i < incomeItem.length; i++) {
+            income += parseInt(incomeItem[i].quantity)
+        }
+        document.dispatchEvent(new CustomEvent('total-quantity', {
+                detail: {
+                    income: income,
+                    expenses: expenses
+                }
+        }))
+    })
+
 
     const list = $element.querySelector('.putithere')
     document.addEventListener('reload-list', function (){
             list.innerHTML = ''
-            for (let i = 0; i < itemList.list.length; i++) {
-                const listItem = itemList.list[i]
 
-                list.appendChild(ItemComponent.renderItem(listItem))
+            for (let i = 0; i < itemList.list.length; i++) {
+
+                const listItem = itemList.list[i]
+                ItemComponent.renderItem(listItem);
+
             }
+
         }
     )
 
