@@ -1,6 +1,7 @@
 import ItemListComponent from "./app/itemlist.js";
 import ItemComponent from "./app/items.js";
 import PopupComponent from "./app/pop-up.js";
+import totalQuantityComponent from "./app/totalquantity.js";
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
 
         document.body.appendChild(ItemListComponent.render(itemList));
         PopupComponent.popupAndPass();
+        document.body.appendChild(totalQuantityComponent.render())
 
 
         //----------------------------------Evetnlistener hinzufügen mit custom event type--------------------------------------------
@@ -19,7 +21,6 @@ function App() {
 
         document.addEventListener('delete-item', deleteItem);//DeleteButton
 
-        document.addEventListener('total-quantity', totalQuantity);
 
 
         //------------------------Event Listener Funktionen deklariert --------------------------------------
@@ -39,7 +40,7 @@ function App() {
                 itemList.list.push(item);
                 ItemComponent.renderItem(item);
                 document.querySelector('.popup').style.display = "none";
-                console.log(itemList)
+                totalQuantityComponent.reloadTotalQuantity(itemList)
             }
         }
 
@@ -52,8 +53,8 @@ function App() {
 
         function deleteItem(event) {
             itemList.delete(event.detail.item)
-            console.log(itemList)
             reloadList()
+            totalQuantityComponent.reloadTotalQuantity(itemList)
 
 
         }
@@ -62,22 +63,6 @@ function App() {
             document.dispatchEvent(new CustomEvent('reload-list'))
         }
 
-        function totalQuantity(event) {
-            const expenses = event.detail.expenses;
-            const income = event.detail.income;
-
-            const totalExpenses = document.createElement('div')
-            totalExpenses.innerHTML='';
-            totalExpenses.innerHTML= `<p>${expenses}</p>`;
-            //document.querySelector('.-total-expenses').appendChild('div')
-            const totalIncome = document.createElement('div')
-            totalIncome.innerHTML='';
-            totalIncome.innerHTML = `<p>${income}</p>`;
-
-            document.querySelector('.-total-expenses').appendChild(totalExpenses)
-            document.querySelector('.-total-income').appendChild(totalIncome)
-
-        }
 
     }
 }

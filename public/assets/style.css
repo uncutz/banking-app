@@ -7,7 +7,7 @@ body {
 :root {
     --primary-color:#6651C5;
 }
-.container, .col {
+.container, .col, .row {
     text-align: center;
 }
 

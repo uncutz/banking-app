@@ -1,5 +1,3 @@
-import ItemListComponent from "./itemlist.js";
-
 class Item {
 
     name
@@ -15,10 +13,10 @@ class Item {
      * @param {select} type
      */
     constructor(name, date, quantity, type) {
-    this.name = name;
-    this.date = date;
-    this.quantity = quantity;
-    this.type = type;
+        this.name = name;
+        this.date = date;
+        this.quantity = quantity;
+        this.type = type;
     }
 }
 
@@ -34,7 +32,9 @@ function renderItem(item) {
 
     //If Else für Farben
     const $select = document.querySelector('.selectType').value;
-    if (item.type === null) {item.type = $select}
+    if (item.type === null) {
+        item.type = $select
+    }
     if (item.type === "expenses") {
         $element.innerHTML = `<div class="row">
                             <div class="col-md-3">${item.name}</div>
@@ -42,8 +42,7 @@ function renderItem(item) {
                             <div class="col-md-3" style="color: red">-${item.quantity}</div>
                             <div class="col-md-3"><button type="button" class="btn btn-light btn-delete">Del</button></div>
                             </div>`
-    }
-    else {
+    } else {
         $element.innerHTML = `<div class="row">
                             <div class="col-md-3">${item.name}</div>
                             <div class="col-md-3">${item.date}</div>
@@ -53,6 +52,7 @@ function renderItem(item) {
     }
 
     $element.querySelector('.btn-delete').addEventListener('click', deleteItem);
+
     function deleteItem() {
         document.dispatchEvent(new CustomEvent('delete-item', {
             detail: {
