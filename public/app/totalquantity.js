@@ -1,6 +1,6 @@
 
 
-function render () {
+function render () { //unterste Zeile mit Summen
     const $element = document.createElement('div')
     $element.innerHTML = `<div class="row -sum">
         <div class="col-md-6 -total-income">
@@ -20,7 +20,7 @@ function render () {
 
 
 
-function reloadTotalQuantity(itemList){
+function reloadTotalQuantity(itemList){ //macht einen Refresh bei der letzten Zeile wo die Summen angezeigt werden
     let income = 0;
     let expenses = 0;
     const incomeItem = itemList.list.filter(item => item.type === "income");
@@ -33,9 +33,11 @@ function reloadTotalQuantity(itemList){
     }
 
     const totalExpenses = document.createElement('div')
-    totalExpenses.innerHTML= `Expenses: <p>${expenses}</p>`;
+    totalExpenses.innerHTML= `Expenses: <p style="color: red">-${expenses}</p>`;
+
     const totalIncome = document.createElement('div')
-    totalIncome.innerHTML = `Income: <p>${income}</p>`;
+    totalIncome.innerHTML = `Income: <p style="color: green">+${income}</p>`;
+
     const total = income - expenses;
     const totalQuantity = document.createElement('div')
 
@@ -43,7 +45,7 @@ function reloadTotalQuantity(itemList){
         totalQuantity.innerHTML = `Total: <p style="color: green">+${total}</p>`
     }
     else if (income < expenses) {
-        totalQuantity.innerHTML = `Total: <p style="color: red">-${total}</p>`
+        totalQuantity.innerHTML = `Total: <p style="color: red">${total}</p>`
     }
     else {
         totalQuantity.innerHTML = `Total: <p style="color: dimgrey">${total}</p>`

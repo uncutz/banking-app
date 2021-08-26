@@ -14,6 +14,46 @@ class ItemList {
         this.list.splice(index, 1);
     }
 
+
+    toJSON() {
+        let list = []
+
+        for (let i = 0; i < this.list.length; i++) {
+
+            const item = this.list[i]
+
+            list.push({
+                name: item.name,
+                date: item.date,
+                quantity: item.quantity,
+                type: item.type
+
+            })
+        }
+        return JSON.stringify(list)
+    }
+
+    static fromJSON(json) {
+        const list = JSON.parse(json)
+        console.log(list)
+        const itemList = new ItemList();
+        for (let i = 0; i < list.length; i++) {
+            const record = list[i];
+            console.log(i)
+
+            itemList.list.push(
+                new ItemComponent.Item(
+                    record.name,
+                    record.date,
+                    record.quantity,
+                    record.type
+                )
+            )
+            console.log('fromJSON')
+        }
+        return itemList;
+    }
+
 }
 
 /**
