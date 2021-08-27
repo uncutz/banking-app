@@ -25,7 +25,7 @@ body {
 }
 .-balance {
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 3em;
     color: #828282;
 }
 
@@ -54,4 +54,13 @@ body {
 .-sum {
     background-color: rgb(248,249,250);
     height: 3em;
+}
+.-chart-type {
+    max-width: 200px;
+    height: 25px;
+}
+
+div.-place-for-chart div {
+    display: flex;
+    justify-content: center;
 }

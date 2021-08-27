@@ -1,5 +1,5 @@
 import ItemComponent from "./items.js";
-//var Chart = ('../../chart.js/package/dist/chart.js');
+
 
 class ItemList {
 
@@ -85,9 +85,9 @@ function render(itemList) {
             </div>
         </nav>
 
-    <div class="row">
-        <div class="col">diagramm</div>
-        
+    <div class="row justify-content-center -place-for-chart"> <!-- LAAAAAAADEEENN der Chart muss noch korrekt implementiert werden -->
+      
+      
     </div>
 
     <div class="row">

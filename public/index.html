@@ -63,9 +63,6 @@
     </div>
 </div>-->
 
-<div>
-    <canvas id="myChart"></canvas>
-</div>
 
 
 
@@ -73,43 +70,6 @@
     import App from "./app.js";
     (new App()).run();
 
-
-const config = {
-    type: 'line',
-    data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        datasets: [{
-            label: 'Income',
-            data: [1000,1200,2341],
-            backgroundColor: ['rgba(255,255,255,0.2)'
-            ],
-            borderColor: [
-                'rgb(115,201,13)'
-            ],
-            borderWidth: 2
-        },{
-            label: 'Expenses',
-            data: [-200,-1200,-341],
-            backgroundColor: ['rgba(255,255,255,0.2)'
-            ],
-            borderColor: [
-                'rgb(201,13,13)'
-            ],
-            borderWidth: 2
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-};
-
-const myChartObject = document.getElementById('myChart').getContext('2d');
-const chart = new Chart(myChartObject,
-    config);
 
 
 </script>

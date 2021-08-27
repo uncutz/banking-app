@@ -21,8 +21,9 @@ function App() {
         }
 
         console.log(localStorage)
-        console.log(itemList.list[1].date)
-        console.log(itemList.list[1].date.substr(5, 2))
+        //console.log(itemList.list[1].date)
+        //console.log(itemList.list[1].date.substr(5, 2))
+
 
         document.body.appendChild(ItemListComponent.render(itemList));
         PopupComponent.popupAndPass();
@@ -30,37 +31,44 @@ function App() {
         reloadList()
         totalQuantityComponent.reloadTotalQuantity(itemList)
 
-        calc.calcExpenses(itemList);
+        calc.loadChart(itemList);//Chart zum ersten Mal implementiert
 
 
-        //----------------------------------Evetnlistener hinzufügen mit custom event type--------------------------------------------
+        //----------------------------------Eventlistener hinzufügen mit custom event type--------------------------------------------
         document.addEventListener('add-new', newItem);//AddNew Button
 
         document.addEventListener('save-item', saveItem);//SaveButton
 
         document.addEventListener('delete-item', deleteItem);//DeleteButton
 
+        document.querySelector('.-chart-type').addEventListener('select', function() {
+            reloadChart();
+            console.log('onlick')
+        })
+
 
 
         //------------------------Event Listener Funktionen deklariert --------------------------------------
         //weist dem Object itemList einen weitergegebenen Wert (Eigenschaft 'item' vom Eventobject) des Eventobjekts 'event' vom cutom event typ 'add-item' zu
-        //funktion gehört zum obigen eventlistener welcher durch event type 'add-item' auf das custom event referenziert
+        //funktion gehört zum obigen eventlistener welcher durch event type 'save-item' auf das custom event referenziert
         function saveItem(event) {
 
             const select = event.detail.select;
-            if (select !== "income" && select !== "expenses") {
-                alert('Please select Type!')
+            const name = event.detail.name;
+            const date = event.detail.date;
+            const quantity = event.detail.quantity;
+            const type = event.detail.type;
+            if ( type === '' || name === '' || date === '' || quantity === '' ) { //fordert auf alle Felder auszufüllen
+                alert('Please enter all information!')
             } else {
-                const name = event.detail.name;
-                const date = event.detail.date;
-                const quantity = event.detail.quantity;
-                const type = event.detail.type;
+
                 const item = new ItemComponent.Item(name, date, quantity, type)
                 itemList.list.push(item);
                 ItemComponent.renderItem(item);
                 document.querySelector('.popup').style.display = "none";
                 totalQuantityComponent.reloadTotalQuantity(itemList)
                 storeItems();
+                reloadChart();
 
             }
         }
@@ -77,6 +85,7 @@ function App() {
             reloadList()
             totalQuantityComponent.reloadTotalQuantity(itemList)
             storeItems();
+            reloadChart();
 
 
         }
@@ -89,6 +98,12 @@ function App() {
         //speichert alles im Localstorage indem Funktion die Methode toJSON vom Object itemList der Klasse ItemList aufruft
         function storeItems() {
             store.setItem('items', itemList.toJSON())
+        }
+
+        function reloadChart() { //lädt die Chart neu
+            const chart = document.querySelector('.-place-for-chart')
+            chart.innerHTML='';
+            calc.loadChart(itemList);
         }
 
 
