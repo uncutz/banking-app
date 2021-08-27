@@ -13,8 +13,8 @@ function popupAndPass () { //wenn man auf Button save klickt wird object in list
                                         <option value="expenses">Expenses</option>
                                     </select>
                                     <input class = "inp-name" type="text" placeholder="name">
-                                    <input class ="inp-date" type="text" placeholder="date">
-                                    <input class ="inp-quantity" type="text" placeholder="amout"><br>
+                                    <input class ="inp-date" type="date" placeholder="date">
+                                    <input class ="inp-quantity" type="number" placeholder="amout"><br>
                                     <button type="button" class="btn btn-dark btn-sm save">Save</button>
                                 </div>
                             </div>`;

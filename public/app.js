@@ -3,6 +3,7 @@ import ItemComponent from "./app/items.js";
 import PopupComponent from "./app/pop-up.js";
 import totalQuantityComponent from "./app/totalquantity.js";
 import store from "./app/store.js";
+import calc from "./app/chartcalc.js";
 
 function App() {
 
@@ -13,20 +14,24 @@ function App() {
         let itemList;
         if (json) {
             itemList = ItemListComponent.ItemList.fromJSON(json)
-            console.log(itemList)
+            console.log(itemList.list)
         }
         else {
             itemList = new ItemListComponent.ItemList();//neu erstellte Variable die ein Object mit einem Array als Eigenschaft besitzt
-            console.log(itemList)
         }
 
         console.log(localStorage)
+        console.log(itemList.list[1].date)
+        console.log(itemList.list[1].date.substr(5, 2))
 
         document.body.appendChild(ItemListComponent.render(itemList));
         PopupComponent.popupAndPass();
         document.body.appendChild(totalQuantityComponent.render())
         reloadList()
         totalQuantityComponent.reloadTotalQuantity(itemList)
+
+        calc.calcExpenses(itemList);
+
 
         //----------------------------------Evetnlistener hinzufügen mit custom event type--------------------------------------------
         document.addEventListener('add-new', newItem);//AddNew Button
@@ -56,6 +61,7 @@ function App() {
                 document.querySelector('.popup').style.display = "none";
                 totalQuantityComponent.reloadTotalQuantity(itemList)
                 storeItems();
+
             }
         }
 

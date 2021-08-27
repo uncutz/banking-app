@@ -1,4 +1,5 @@
 import ItemComponent from "./items.js";
+//var Chart = ('../../chart.js/package/dist/chart.js');
 
 class ItemList {
 
@@ -86,6 +87,7 @@ function render(itemList) {
 
     <div class="row">
         <div class="col">diagramm</div>
+        
     </div>
 
     <div class="row">
@@ -95,7 +97,8 @@ function render(itemList) {
 
     </div>
     
-</div>`;
+</div>
+`;
 
 
     const list = $element.querySelector('.putithere')
