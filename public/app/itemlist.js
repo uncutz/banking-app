@@ -86,7 +86,13 @@ function render(itemList) {
         </nav>
 
     <div class="row justify-content-center -place-for-chart"> <!-- LAAAAAAADEEENN der Chart muss noch korrekt implementiert werden -->
-      
+      <div class="mt-4">
+            <label for="select-chart-type">Chart Type:</label>
+            <select class="-chart-type mx-2" id="select-chart-type">
+                <option value="bar">BarChart</option>
+                <option value="line">LineChart</option>
+            </select>
+        </div>
       
     </div>
 

@@ -38,8 +38,6 @@ function popupAndPass () { //wenn man auf Button save klickt wird object in list
         //erstes Custom event
         document.dispatchEvent(new CustomEvent('save-item', {
             detail: {
-
-                select: $element.querySelector('.selectType').value,
                 name: inpName,
                 date: inpDate,
                 quantity: inpQuantity,

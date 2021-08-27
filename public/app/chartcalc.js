@@ -138,27 +138,27 @@ function calcIncome(itemList) {
 }
 
 
-function loadAndConfigChart (incomeValues, expensesValues) { //um chart zu displayen und generell die js config
+function loadAndConfigChart (incomeValues, expensesValues, chartType = 'bar') { //um chart zu displayen und generell die js config
 
     const $element = document.createElement('div');
     $element.innerHTML= `    
-    <div class="mt-4">
+    <!--<div class="mt-4">
             <label for="select-chart-type">Chart Type:</label>
             <select class="-chart-type mx-2" id="select-chart-type">
                 <option value="bar">BarChart</option>
                 <option value="line">LineChart</option>
             </select>
-        </div>
+        </div>-->
     <div class="w-75 mb-3">
         <canvas id="myChart"></canvas>
     </div>`;
+
     document.querySelector('.-place-for-chart').appendChild($element);
 
 
-    console.log($element.querySelector('.-chart-type').value)
 
     const config = {
-        type: $element.querySelector('.-chart-type').value,
+        type: chartType,
         data: {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             datasets: [{
@@ -197,12 +197,13 @@ function loadAndConfigChart (incomeValues, expensesValues) { //um chart zu displ
         config);
 
 
+
 }
 
-function loadChart(itemList) {
+function loadChart(itemList, chartType) {
     const incomeValues = calcIncome(itemList);
     const expensesValues = calcExpenses(itemList);
-    loadAndConfigChart(incomeValues, expensesValues)
+    loadAndConfigChart(incomeValues, expensesValues, chartType)
 }
 
 

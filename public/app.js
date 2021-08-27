@@ -21,8 +21,6 @@ function App() {
         }
 
         console.log(localStorage)
-        //console.log(itemList.list[1].date)
-        //console.log(itemList.list[1].date.substr(5, 2))
 
 
         document.body.appendChild(ItemListComponent.render(itemList));
@@ -41,10 +39,12 @@ function App() {
 
         document.addEventListener('delete-item', deleteItem);//DeleteButton
 
-        document.querySelector('.-chart-type').addEventListener('select', function() {
-            reloadChart();
-            console.log('onlick')
+        document.querySelector('.-chart-type').addEventListener('change', function () {
+            console.log('changed')
+            const selectChartType = document.querySelector('.-chart-type').value;
+            reloadChart(selectChartType);
         })
+
 
 
 
@@ -53,7 +53,6 @@ function App() {
         //funktion gehört zum obigen eventlistener welcher durch event type 'save-item' auf das custom event referenziert
         function saveItem(event) {
 
-            const select = event.detail.select;
             const name = event.detail.name;
             const date = event.detail.date;
             const quantity = event.detail.quantity;
@@ -100,10 +99,10 @@ function App() {
             store.setItem('items', itemList.toJSON())
         }
 
-        function reloadChart() { //lädt die Chart neu
+        function reloadChart(selectChartType) { //lädt die Chart neu
             const chart = document.querySelector('.-place-for-chart')
             chart.innerHTML='';
-            calc.loadChart(itemList);
+            calc.loadChart(itemList, selectChartType);
         }
 
 
