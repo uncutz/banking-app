@@ -32,7 +32,7 @@ function renderItem(item) {
 
     //If Else für Farben
     const $select = document.querySelector('.selectType').value;
-    if (item.type === null) {
+    if (item.type === null) { //wenn wir die Liste neu laden hat select keinen Wert aber der Typ Ausgabe/Eingabe ist im localstorage gespeichert
         item.type = $select
     }
     if (item.type === "expenses") {
@@ -52,7 +52,6 @@ function renderItem(item) {
     }
 
     $element.querySelector('.btn-delete').addEventListener('click', deleteItem);
-
     function deleteItem() {
         document.dispatchEvent(new CustomEvent('delete-item', {
             detail: {

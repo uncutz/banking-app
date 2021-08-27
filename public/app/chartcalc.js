@@ -70,7 +70,7 @@ function calcExpenses(itemList) {
 
 /**
  *
- * @param {ItemListComponent.ItemList}itemList
+ * @param {ItemListComponent.ItemList} itemList
  */
 
 function calcIncome(itemList) {
@@ -138,17 +138,10 @@ function calcIncome(itemList) {
 }
 
 
-function loadAndConfigChart (incomeValues, expensesValues, chartType = 'bar') { //um chart zu displayen und generell die js config
+function loadAndConfigChart (incomeValues, expensesValues, chartType = document.querySelector('.-chart-type').value ) { //um chart zu displayen und generell die js config
 
     const $element = document.createElement('div');
     $element.innerHTML= `    
-    <!--<div class="mt-4">
-            <label for="select-chart-type">Chart Type:</label>
-            <select class="-chart-type mx-2" id="select-chart-type">
-                <option value="bar">BarChart</option>
-                <option value="line">LineChart</option>
-            </select>
-        </div>-->
     <div class="w-75 mb-3">
         <canvas id="myChart"></canvas>
     </div>`;

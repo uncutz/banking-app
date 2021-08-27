@@ -21,6 +21,10 @@ function popupAndPass () { //wenn man auf Button save klickt wird object in list
 
 
     document.querySelector('.add-new').addEventListener('click', function () {
+        document.querySelector('.inp-name').value = '';
+        document.querySelector('.inp-date').value = '';
+        document.querySelector('.inp-quantity').value = '';
+        document.querySelector('.selectType').value = '';
         document.dispatchEvent(new CustomEvent('add-new', {
             detail: {
                 element: $element.querySelector('.popup')

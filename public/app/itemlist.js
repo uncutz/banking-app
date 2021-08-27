@@ -50,7 +50,6 @@ class ItemList {
                     record.type
                 )
             )
-            console.log('fromJSON')
         }
         return itemList;
     }
@@ -85,14 +84,14 @@ function render(itemList) {
             </div>
         </nav>
 
-    <div class="row justify-content-center -place-for-chart"> <!-- LAAAAAAADEEENN der Chart muss noch korrekt implementiert werden -->
-      <div class="mt-4">
+          <div class="mt-4">
             <label for="select-chart-type">Chart Type:</label>
             <select class="-chart-type mx-2" id="select-chart-type">
-                <option value="bar">BarChart</option>
-                <option value="line">LineChart</option>
+                <option value="bar">Bar Chart</option>
+                <option value="line">Line Chart</option>
             </select>
         </div>
+    <div class="row justify-content-center -place-for-chart"> <!-- LAAAAAAADEEENN der Chart muss noch korrekt implementiert werden -->
       
     </div>
 
